@@ -1,0 +1,48 @@
+﻿@model Assignment1_EventSignup.Models.Event
+
+<h1>Manage Attendees – @Model.Title</h1>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">@ViewBag.Message</div>
+}
+
+<div class="card p-3" style="max-width: 600px;">
+    <h4>Sign Up for @Model.Title</h4>
+
+    @using (Html.BeginForm("Manage", "EventManager", new { id = Model.Id }, FormMethod.Post))
+    {
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" name="name" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" name="email" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Sign Up</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "EventManager")">Back to Events</a>
+    }
+</div>
+
+<hr />
+
+<h4>Current Attendees (@Model.Attendees.Count)</h4>
+
+@if (Model.Attendees.Count == 0)
+{
+    <p>No attendees yet.</p>
+}
+else
+{
+    <ul class="list-group" style="max-width: 600px;">
+        @foreach (var a in Model.Attendees)
+        {
+            <li class="list-group-item">
+                <strong>@a.Name</strong> (@a.Email)
+            </li>
+        }
+    </ul>
+}

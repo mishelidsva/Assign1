@@ -1,0 +1,31 @@
+﻿@model List<Assignment1_EventSignup.Models.Event>
+
+<h1>Event Manager</h1>
+<p>Select an event to manage attendees.</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ev in Model)
+        {
+            <tr>
+                <td>@ev.Title</td>
+                <td>@ev.Date.ToString("yyyy-MM-dd")</td>
+                <td>@ev.Location</td>
+                <td class="text-end">
+                    <a class="btn btn-primary" href="@Url.Action("Manage", "EventManager", new { id = ev.Id })">
+                        Manage Attendees
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
